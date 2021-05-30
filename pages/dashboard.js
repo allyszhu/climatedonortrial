@@ -1,6 +1,7 @@
 import {Button, Layout, Row} from 'antd';
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import NavBar from "../components/NavBar";
+import { getProjectsByDonor} from '../lib/firebase';
 
 
 import {
@@ -15,6 +16,15 @@ const {Content} = Layout;
 
 const DonorDashboard = () => {
   const AuthUser = useAuthUser()
+  
+  const [donorProjects,setDonorProjects]=useState([])
+  const fetchDonorProjects=async()=>{
+    let projects = await getProjectsByDonor(AuthUser.id)
+    setDonorProjects(projects);
+  }
+  useEffect(() => {
+    fetchDonorProjects();
+  }, [])
 
   return (
     <>
@@ -37,6 +47,29 @@ const DonorDashboard = () => {
 
                 <br/>
                 {/* Testing projectCard Component */}
+                {
+                  donorProjects && donorProjects.map((project, index)=>{
+                    const data = project.data();
+                    return(
+                      <Row key={index}>
+                      <ProjectCard
+                        key={project.id}
+                        tagName={data.tagName}
+                        src={data.src}
+                        projectTitle={data.title}
+                        projectDescription={data.description}
+                        author={data.author}
+                        location={data.location}
+                        published={data.published.toDate().toLocaleDateString() + ''}
+                        updated={data.updated.toDate().toLocaleDateString() + ''}
+                        curAmt={data.curAmt}
+                        totalAmt = {data.totalAmt}
+                        
+                      />
+                    </Row>
+                    )
+                  })
+                }
 
 
 
