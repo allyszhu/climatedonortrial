@@ -35,11 +35,13 @@ a {
 
 .siteContent {
 	margin-top: 64px;
-	padding-top: 50px; 
+	padding-top: 50px;
 	background-color: #fff;
 }
 
-
+.projectPageContent {
+	background-color: #FAFAFA;
+}
 .ant-btn-default:focus {
 	color: rgba(0, 0, 0, 0.85) !important;
 }
@@ -47,7 +49,7 @@ a {
 /* Ant design menu Style overwrite */
 .ant-menu-submenu-title,
 .ant-menu-submenu-title:hover {
-  font-size: 17px;
+	font-size: 17px;
 	color: black !important;
 }
 .ant-menu-submenu-arrow,
@@ -71,8 +73,8 @@ a {
 	border-right: 3px solid #048a81;
 }
 
-.ant-dropdown-menu-item:hover, 
-.ant-dropdown-menu-submenu-title:hover{
+.ant-dropdown-menu-item:hover,
+.ant-dropdown-menu-submenu-title:hover {
 	background-color: #d4efde !important;
 	border-right: 3px solid #048a81;
 	color: #048a81;

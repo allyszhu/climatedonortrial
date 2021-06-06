@@ -8,7 +8,6 @@ import SearchBar from '../components/SearchBar';
 import ProjectCard from '../components/ProjectCard';
 import styles from '../styles/Dashboard.module.css';
 import { getProjectsByDonor } from '../lib/firebase';
-
 import {
   useAuthUser,
   withAuthUser,
@@ -17,6 +16,18 @@ import {
 
 
 const { Content } = Layout;
+const data1 = {
+  tagName: 'Clean Energy',
+                src: "https://via.placeholder.com/150",
+                projectTitle: "Repurposing Oil Platforms",
+                projectDescription:"Imagine if all offshore oil platforms were converted to clearn energy producing wind turbine platforms...",
+                author:"Climate Donor",
+                location:"Stanford, CA",
+                published: new Date().toLocaleDateString() + '',
+                updated: new Date().toLocaleDateString() + '',
+                curAmt:"75,890",
+                totalAmt:"89,000",
+}
 
 const DonorDashboard = () => {
   const AuthUser = useAuthUser()
@@ -26,6 +37,7 @@ const DonorDashboard = () => {
   const fetchDonorProjects = async () => {
     let projects = await getProjectsByDonor(AuthUser.id)
     setDonorProjects(projects);
+    console.log("projects", AuthUser.firebaseUser)
   }
   useEffect(() => {
     fetchDonorProjects();
@@ -78,18 +90,18 @@ const DonorDashboard = () => {
             })
           }
           <Row>
-            <ProjectCard
-              tagName='Clean Energy'
-              src="https://via.placeholder.com/150"
-              projectTitle="Repurposing Oil Platforms"
-              projectDescription="Imagine if all offshore oil platforms were converted to clearn energy producing wind turbine platforms..."
-              author="Climate Donor"
-              location="Stanford, CA"
-              published={new Date().toLocaleDateString() + ''}
-              updated={new Date().toLocaleDateString() + ''}
-              curAmt="75,890"
-              totalAmt="89,000"
-            />
+              <ProjectCard
+                tagName='Clean Energy'
+                src="https://via.placeholder.com/150"
+                projectTitle="Repurposing Oil Platforms"
+                projectDescription="Imagine if all offshore oil platforms were converted to clearn energy producing wind turbine platforms..."
+                author="Climate Donor"
+                location="Stanford, CA"
+                published={new Date().toLocaleDateString() + ''}
+                updated={new Date().toLocaleDateString() + ''}
+                curAmt="75,890"
+                totalAmt="89,000"
+              />
           </Row>
           <Row>
             <ProjectCard

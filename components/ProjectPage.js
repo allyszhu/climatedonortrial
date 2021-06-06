@@ -44,7 +44,7 @@ const ProjectPage = (props) => {
                 </div>
             </div>
             <div className={styles.row}>
-                <Image width={600} height={400} src={src} fallback="error_project.png"/>
+                <Image width={630} height={420} src={src} fallback="error_project.png"/>
                 <div className={styles.cardContent}>
                     <div className={styles.cardContent__info}>
                         <p>Funds Raised (USD)</p>
@@ -71,7 +71,7 @@ const ProjectPage = (props) => {
                 <p>{projectFullDescription}</p>
             </div>
             <div className={styles.projectUpdates}>
-
+                <h2 className={styles.projectUpdates_title}>Project Updates</h2>
             </div>
         </div>
     )

@@ -43,7 +43,7 @@ const NavBar = ({ userId, signOut, userName }) => {
     return (
         <Header className={styles.appHeader}>
             <div className={styles.siteLogo}>
-                <img src="logo2.png" alt="logo of Climate Donor" />
+                <img src="/logo2.png" alt="logo of Climate Donor" />
                 <p>Climate Donor</p>
             </div>
             <Menu

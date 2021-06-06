@@ -2,6 +2,7 @@ import styles from '../styles/ProjectCard.module.css'
 import { Image, Progress } from 'antd';
 import { faUser, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link';
 
 const tag_text1 = "Clean Energy"
 const tag_text2 = "Transportation"
@@ -14,8 +15,9 @@ const calPercentage = (currentAmt, total) => {
 
 
 const ProjectCard = (props) => {
-    const { src, projectTitle, projectDescription, tagName, author, location, published, updated, curAmt, totalAmt } = props
+    const { key, src, projectTitle, projectDescription, tagName, author, location, published, updated, curAmt, totalAmt } = props
     return (
+        <Link href={`projects/${key ? key : 1}`}>
         <div className={styles.projectCard}>
             <Image width={200} height={180} src={src} fallback="error_project.png" />
             <div className={styles.cardContent}>
@@ -41,6 +43,7 @@ const ProjectCard = (props) => {
                 </div>
             </div>
         </div>
+        </Link>
     )
 }
 
