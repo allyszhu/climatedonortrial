@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { getDoc } from '../lib/firebase'
+import { getSession } from '../lib/payment'
 import {
     useAuthUser,
     withAuthUser,
@@ -13,6 +14,11 @@ import {
 import { addDonation } from '../lib/firebase'
 import DBNavBar from "../components/DBNavBar";
 import Link from 'next/link';
+
+import { loadStripe } from '@stripe/stripe-js';
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const tag_text1 = "Clean Energy"
 const tag_text2 = "Transportation"
@@ -45,9 +51,29 @@ const ProjectPage = () => {
 
     getProject()
 
-    const handleDonate = () => {
+    const handleDonate = async (event) => {
+        // Get Stripe.js instance
+        const stripe = await stripePromise;
+    
+        // Call your backend to create the Checkout Session
+        const response = await fetch('http://localhost:4242/create-checkout-session', { method: 'POST' });
+    
+        const session = await response.json();
+    
+        // When the customer clicks on the button, redirect them to Checkout.
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+    
+        if (result.error) {
+          // If `redirectToCheckout` fails due to a browser or network
+          // error, display the localized error message to your customer
+          // using `result.error.message`.
+        }
+        console.log("Success")
         addDonation(AuthUser.id, projectId, amount)
-    }
+    };
+    
 
 
     return (
